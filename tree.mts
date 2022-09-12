@@ -1,5 +1,6 @@
 import { Node } from "./Node.mjs";
 import { mergeSort } from "./merge.mjs";
+import { prettyPrint } from "./prettyPrint.mjs";
 class Tree {
   root: any;
   constructor(array) {
@@ -15,12 +16,3 @@ function buildTree(array: number[], start = 0, end = array.length - 1) {
   rootNode.right = buildTree(array, middle + 1, end);
   return rootNode;
 }
-const prettyPrint = (node, prefix = "", isLeft = true) => {
-  if (node.right !== null) {
-    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-  }
-  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.data}`);
-  if (node.left !== null) {
-    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-  }
-};
