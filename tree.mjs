@@ -6,6 +6,21 @@ class Tree {
     constructor(array) {
         this.setup(array);
     }
+    find(value) {
+        let currentNode = this.root;
+        while (currentNode) {
+            if (currentNode.data == value) {
+                return currentNode;
+            }
+            if (value > currentNode.data) {
+                currentNode = currentNode.right;
+            }
+            else {
+                currentNode = currentNode.left;
+            }
+        }
+        return false;
+    }
     setup(array) {
         this.array = [...new Set(mergeSort(array))];
         this.root = buildTree(this.array);
