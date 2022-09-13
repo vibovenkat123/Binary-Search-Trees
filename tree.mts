@@ -11,6 +11,15 @@ class Tree {
     this.array = [...new Set(mergeSort(array))];
     this.root = buildTree(this.array);
   }
+  delete(value: number) {
+    let index = this.array.indexOf(value);
+    if (index > -1) {
+      this.array.splice(index, 1);
+      this.setup(this.array);
+    } else {
+      return "Enter a valid number";
+    }
+  }
   insert(value: number) {
     this.array.push(value);
     this.setup(this.array);
