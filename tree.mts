@@ -21,7 +21,19 @@ class Tree {
     }
     return false;
   }
-  setup(array) {
+  levelOrder(func: Function) {
+    const queue = [this.root];
+    if (!func) return this.array;
+    while (queue.length) {
+      for (let i = 0; i < queue.length; i++) {
+        const currentNode = queue.shift();
+        if (currentNode.right) queue.push(currentNode.right);
+        if (currentNode.left) queue.push(currentNode.left);
+        func(currentNode);
+      }
+    }
+  }
+  setup(array: any[]) {
     this.array = [...new Set(mergeSort(array))];
     this.root = buildTree(this.array);
   }
