@@ -3,9 +3,17 @@ import { mergeSort } from "./merge.mjs";
 import { prettyPrint } from "./prettyPrint.mjs";
 class Tree {
   root: any;
+  array = [];
   constructor(array) {
-    array = [...new Set(mergeSort(array))];
-    this.root = buildTree(array);
+    this.setup(array);
+  }
+  setup(array) {
+    this.array = [...new Set(mergeSort(array))];
+    this.root = buildTree(this.array);
+  }
+  insert(value: number) {
+    this.array.push(value);
+    this.setup(this.array);
   }
 }
 function buildTree(array: number[], start = 0, end = array.length - 1) {

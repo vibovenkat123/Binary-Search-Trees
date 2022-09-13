@@ -2,9 +2,17 @@ import { Node } from "./Node.mjs";
 import { mergeSort } from "./merge.mjs";
 class Tree {
     root;
+    array = [];
     constructor(array) {
-        array = [...new Set(mergeSort(array))];
-        this.root = buildTree(array);
+        this.setup(array);
+    }
+    setup(array) {
+        this.array = [...new Set(mergeSort(array))];
+        this.root = buildTree(this.array);
+    }
+    insert(value) {
+        this.array.push(value);
+        this.setup(this.array);
     }
 }
 function buildTree(array, start = 0, end = array.length - 1) {
