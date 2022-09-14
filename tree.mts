@@ -91,6 +91,18 @@ class Tree {
       return "Enter a valid number";
     }
   }
+  isBalanced(root = this.root) {
+    if (!root) return true;
+    let leftHeight = this.height(root.left);
+    let rightHeight = this.height(root.right);
+    if (
+      Math.abs(leftHeight - rightHeight) <= 1 &&
+      this.isBalanced(root.left) &&
+      this.isBalanced(root.right)
+    )
+      return true;
+    return false;
+  }
   insert(value: number) {
     this.array.push(value);
     this.setup(this.array);
