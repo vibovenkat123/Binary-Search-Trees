@@ -1,5 +1,5 @@
-import { prettyPrint } from "../../prettyPrint.mjs";
-import Tree from "../../tree.mjs";
+import { prettyPrint } from "./prettyPrint.mjs";
+import Tree from "./tree.mjs";
 const randomArray = (size) => {
     return Array.from({ length: size }, () => Math.floor(Math.random() * 100));
 };
