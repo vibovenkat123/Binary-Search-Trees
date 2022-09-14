@@ -49,6 +49,13 @@ class Tree {
       }
     }
   }
+  postorder(func: Function, currentNode = this.root) {
+    if (!func) return this.array;
+    if (!currentNode) return;
+    this.postorder(func, currentNode.left);
+    this.postorder(func, currentNode.right);
+    func(currentNode);
+  }
   setup(array: any[]) {
     this.array = [...new Set(mergeSort(array))];
     this.root = buildTree(this.array);
