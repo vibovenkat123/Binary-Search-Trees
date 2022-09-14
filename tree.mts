@@ -120,6 +120,3 @@ function buildTree(array: number[], start = 0, end = array.length - 1) {
   rootNode.right = buildTree(array, middle + 1, end);
   return rootNode;
 }
-const randomArray = (size) => {
-  return Array.from({ length: size }, () => Math.floor(Math.random() * 100));
-};
