@@ -6,6 +6,16 @@ class Tree {
     constructor(array) {
         this.setup(array);
     }
+    inorder(func, currentNode = this.root) {
+        if (!func)
+            return this.array;
+        if (currentNode === null) {
+            return;
+        }
+        this.inorder(func, currentNode.left);
+        func(currentNode);
+        this.inorder(func, currentNode.right);
+    }
     find(value) {
         let currentNode = this.root;
         while (currentNode) {
