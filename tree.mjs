@@ -31,6 +31,15 @@ class Tree {
         }
         return false;
     }
+    preorder(func, currentNode = this.root) {
+        if (!func)
+            return this.array;
+        if (!currentNode)
+            return;
+        func(currentNode);
+        this.preorder(func, currentNode.left);
+        this.preorder(func, currentNode.right);
+    }
     levelOrder(func) {
         const queue = [this.root];
         if (!func)
