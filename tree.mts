@@ -7,14 +7,15 @@ class Tree {
   constructor(array) {
     this.setup(array);
   }
-  inorder(func: Function, currentNode = this.root) {
-    if (!func) return this.array;
+  inorder(func?: Function, currentNode = this.root, result = []) {
     if (currentNode === null) {
       return;
     }
-    this.inorder(func, currentNode.left);
-    func(currentNode);
-    this.inorder(func, currentNode.right);
+    this.inorder(func, currentNode.left, result);
+    if (func) func(currentNode);
+    result.push(currentNode.data);
+    this.inorder(func, currentNode.right, result);
+    return result;
   }
   find(value: number) {
     let currentNode = this.root;
@@ -46,31 +47,34 @@ class Tree {
     }
     return false;
   }
-  preorder(func: Function, currentNode = this.root) {
-    if (!func) return this.array;
+  preorder(func?: Function, currentNode = this.root, result = []) {
     if (!currentNode) return;
-    func(currentNode);
-    this.preorder(func, currentNode.left);
-    this.preorder(func, currentNode.right);
+    result.push(currentNode.data);
+    if (func) func(currentNode);
+    this.preorder(func, currentNode.left, result);
+    this.preorder(func, currentNode.right, result);
+    return result;
   }
-  levelOrder(func: Function) {
+  levelOrder(func?: Function, result = []) {
     const queue = [this.root];
-    if (!func) return this.array;
     while (queue.length) {
       for (let i = 0; i < queue.length; i++) {
         const currentNode = queue.shift();
         if (currentNode.right) queue.push(currentNode.right);
         if (currentNode.left) queue.push(currentNode.left);
-        func(currentNode);
+        result.push(currentNode.data);
+        if (func) func(currentNode);
       }
     }
+    if (!func) return result;
   }
-  postorder(func: Function, currentNode = this.root) {
-    if (!func) return this.array;
+  postorder(func?: Function, currentNode = this.root, result = []) {
     if (!currentNode) return;
-    this.postorder(func, currentNode.left);
-    this.postorder(func, currentNode.right);
-    func(currentNode);
+    this.postorder(func, currentNode.left, result);
+    this.postorder(func, currentNode.right, result);
+    result.push(currentNode.data);
+    if (func) func(currentNode.data);
+    return result;
   }
   setup(array: any[]) {
     this.array = [...new Set(mergeSort(array))];
@@ -116,3 +120,6 @@ function buildTree(array: number[], start = 0, end = array.length - 1) {
   rootNode.right = buildTree(array, middle + 1, end);
   return rootNode;
 }
+const randomArray = (size) => {
+  return Array.from({ length: size }, () => Math.floor(Math.random() * 100));
+};
