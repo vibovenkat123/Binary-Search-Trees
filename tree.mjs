@@ -139,3 +139,4 @@ function buildTree(array, start = 0, end = array.length - 1) {
     rootNode.right = buildTree(array, middle + 1, end);
     return rootNode;
 }
+export default Tree;

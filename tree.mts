@@ -7,7 +7,7 @@ class Tree {
   constructor(array) {
     this.setup(array);
   }
-  inorder(func?: Function, currentNode = this.root, result = []) {
+  inorder(func?: Function, currentNode = this.root, result: number[] = []) {
     if (currentNode === null) {
       return;
     }
@@ -47,7 +47,7 @@ class Tree {
     }
     return false;
   }
-  preorder(func?: Function, currentNode = this.root, result = []) {
+  preorder(func?: Function, currentNode = this.root, result: number[] = []) {
     if (!currentNode) return;
     result.push(currentNode.data);
     if (func) func(currentNode);
@@ -55,7 +55,7 @@ class Tree {
     this.preorder(func, currentNode.right, result);
     return result;
   }
-  levelOrder(func?: Function, result = []) {
+  levelOrder(func?: Function, result: number[] = []) {
     const queue = [this.root];
     while (queue.length) {
       for (let i = 0; i < queue.length; i++) {
@@ -68,7 +68,7 @@ class Tree {
     }
     if (!func) return result;
   }
-  postorder(func?: Function, currentNode = this.root, result = []) {
+  postorder(func?: Function, currentNode = this.root, result: number[] = []) {
     if (!currentNode) return;
     this.postorder(func, currentNode.left, result);
     this.postorder(func, currentNode.right, result);
@@ -127,3 +127,4 @@ function buildTree(array: number[], start = 0, end = array.length - 1) {
   rootNode.right = buildTree(array, middle + 1, end);
   return rootNode;
 }
+export default Tree;
