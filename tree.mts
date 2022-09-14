@@ -60,6 +60,12 @@ class Tree {
     this.array = [...new Set(mergeSort(array))];
     this.root = buildTree(this.array);
   }
+  height(node) {
+    if (!node) return -1;
+    let leftHeight = this.height(node.left);
+    let rightHeight = this.height(node.right);
+    return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+  }
   delete(value: number) {
     let index = this.array.indexOf(value);
     if (index > -1) {
