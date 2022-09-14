@@ -95,6 +95,13 @@ class Tree {
       return "Enter a valid number";
     }
   }
+  rebalance() {
+    let array = [];
+    this.inorder((item) => {
+      array.push(item.data);
+    });
+    this.setup(array);
+  }
   isBalanced(root = this.root) {
     if (!root) return true;
     let leftHeight = this.height(root.left);
