@@ -30,6 +30,22 @@ class Tree {
     }
     return false;
   }
+  depth(node) {
+    let currentNode = this.root;
+    let depth = 0;
+    while (currentNode) {
+      if (currentNode == node) {
+        return depth;
+      }
+      depth += 1;
+      if (node.data > currentNode.data) {
+        currentNode = currentNode.right;
+      } else {
+        currentNode = currentNode.left;
+      }
+    }
+    return false;
+  }
   preorder(func: Function, currentNode = this.root) {
     if (!func) return this.array;
     if (!currentNode) return;
